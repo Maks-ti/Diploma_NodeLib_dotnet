@@ -13,6 +13,9 @@ public class Edge
     [JsonIgnore]
     public Node NodeTo { get; protected set; }
     
+    // Id ребра
+    public Guid Id { get; protected set; }
+
     // Id узлов в связи
     public Guid NodeFromId { get; protected set; }
     public Guid NodeToId { get; protected set; }
@@ -22,6 +25,8 @@ public class Edge
 
     internal Edge(Node From, Node To, Dictionary<string, object>? parameters = null)
     {
+        Id = Guid.NewGuid();
+
         NodeFrom = From;
         NodeTo = To;
 

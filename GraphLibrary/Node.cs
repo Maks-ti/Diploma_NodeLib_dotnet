@@ -155,11 +155,11 @@ public class Node
         // добавляем исходящее ребро из текущего объекта
         outputEdges.Add(newEdge);
 
-        Queue?.Enqueue(new Command<Node>
+        Queue?.Enqueue(new Command<Edge>
         {
             NodeId = this.Id,
             CommandName = CommandType.AddChild,
-            Value = child
+            Value = newEdge
         });
     }
 
@@ -182,7 +182,7 @@ public class Node
         {
             NodeId = this.Id,
             CommandName = CommandType.DeleteChild,
-            Value = child.Id
+            Value = edge.Id
         });
     }
 

@@ -8,7 +8,7 @@ using System.Text;
 
 namespace GraphLibrary;
 
-public class NodeManager : IDisposable
+public class Graph : IDisposable
 {
     private readonly ConcurrentQueue<Command> _queue; // очередь комманд
     private readonly List<Node> _nodePool;
@@ -33,7 +33,7 @@ public class NodeManager : IDisposable
         Console.WriteLine("NodeManager disposed");
     }
 
-    public NodeManager(string senderEndpoint)
+    public Graph(string senderEndpoint)
     {
         _managerId = Guid.NewGuid();
 
