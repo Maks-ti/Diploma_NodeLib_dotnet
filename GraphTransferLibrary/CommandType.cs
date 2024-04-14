@@ -16,5 +16,5 @@ public enum CommandType
     AddChild,
     DeleteChild,
     Delete,
-
+    SetEdgeParametres,
 }

@@ -7,7 +7,7 @@ namespace GraphTransferLibrary;
 
 public class Command
 {
-    public Guid NodeId { get; set; }
+    public Guid ObjId { get; set; }
 
     [JsonConverter(typeof(StringEnumConverter))] // Применяем конвертер к свойству (конвертация enum в строку а не в число)
     public CommandType CommandName { get; set; }

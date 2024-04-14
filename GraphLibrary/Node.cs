@@ -60,9 +60,9 @@ public class Node
         set
         {
             name = value;
-            Queue.Enqueue(new Command<string>
+            Queue?.Enqueue(new Command<string>
             {
-                NodeId = Id,
+                ObjId = Id,
                 CommandName = CommandType.SetName,
                 Value = value
             });
@@ -75,9 +75,9 @@ public class Node
         set
         {
             color = value;
-            Queue.Enqueue(new Command<string>
+            Queue?.Enqueue(new Command<string>
             {
-                NodeId = Id,
+                ObjId = Id,
                 CommandName = CommandType.SetColor,
                 Value = value
             });
@@ -90,9 +90,9 @@ public class Node
         set
         {
             size = value;
-            Queue.Enqueue(new Command<double>
+            Queue?.Enqueue(new Command<double>
             {
-                NodeId = Id,
+                ObjId = Id,
                 CommandName = CommandType.SetSize,
                 Value = value
             });
@@ -105,9 +105,9 @@ public class Node
         set
         {
             selected = value;
-            Queue.Enqueue(new Command<bool>
+            Queue?.Enqueue(new Command<bool>
             {
-                NodeId = Id,
+                ObjId = Id,
                 CommandName = CommandType.SetSelected,
                 Value = selected
             });
@@ -120,9 +120,9 @@ public class Node
         set
         {
             visited = value;
-            Queue.Enqueue(new Command<int>
+            Queue?.Enqueue(new Command<int>
             {
-                NodeId = Id,
+                ObjId = Id,
                 CommandName = CommandType.SetVisited,
                 Value = value
             });
@@ -135,9 +135,9 @@ public class Node
         set
         {
             this.value = value;
-            Queue.Enqueue(new Command<object>
+            Queue?.Enqueue(new Command<object>
             {
-                NodeId = Id,
+                ObjId = Id,
                 CommandName = CommandType.SetValue,
                 Value = value
             });
@@ -147,7 +147,7 @@ public class Node
     // add child
     public void AddChild(Node child, Dictionary<string, object>? edgeParameters = null)
     {
-        Edge newEdge = new(this, child, edgeParameters);
+        Edge newEdge = new(this, child, edgeParameters, this.Queue);
 
         // добавляем входящее ребро дочернему объекту
         child.inputEdges.Add(newEdge);
@@ -157,7 +157,7 @@ public class Node
 
         Queue?.Enqueue(new Command<Edge>
         {
-            NodeId = this.Id,
+            ObjId = this.Id,
             CommandName = CommandType.AddChild,
             Value = newEdge
         });
@@ -180,7 +180,7 @@ public class Node
 
         Queue?.Enqueue(new Command<Guid>
         {
-            NodeId = this.Id,
+            ObjId = this.Id,
             CommandName = CommandType.DeleteChild,
             Value = edge.Id
         });
@@ -230,7 +230,7 @@ public class Node
 
         Queue?.Enqueue(new Command<Guid>
         {
-            NodeId = Id,
+            ObjId = Id,
             CommandName = CommandType.Delete,
             Value = Id
         });
@@ -254,7 +254,7 @@ public class Node
 
         Queue?.Enqueue(new Command<Node>
         {
-            NodeId = Id,
+            ObjId = Id,
             CommandName = CommandType.Create,
             Value = this
         });

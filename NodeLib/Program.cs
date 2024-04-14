@@ -25,6 +25,13 @@ node1.AddChild(node2, dict);
 
 Node node3 =  manager.CreateNode("node 3");
 
+var childs = node1.Childs;
+foreach (Edge edge in childs)
+{
+    edge.Parameters = dict;
+}
+
+
 var input =  Console.ReadLine();
 
 
