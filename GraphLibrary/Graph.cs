@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 
@@ -54,6 +55,8 @@ public class Graph : IDisposable
         _queueHandlerTask = Task.Run(async () => await QueueProcessingAsync(cancellationTokenSource.Token));
     }
 
+    public ReadOnlyCollection<Node> AllNodes { get { return new ReadOnlyCollection<Node>(_nodePool); } }
+
     public Node CreateNode(string name = "",
         string color = "",
         double size = default,
@@ -96,7 +99,7 @@ public class Graph : IDisposable
         bool hasElement; // в цикле do while гарантируем что обработаем все элементы, даже после запроса на окончание процесса
         do
         {
-            Console.WriteLine(_queue.Count);
+            // Console.WriteLine(_queue.Count);
 
             // получаем элемент, но не удаляем его из очереди
             hasElement = _queue.TryPeek(out Command? command);
